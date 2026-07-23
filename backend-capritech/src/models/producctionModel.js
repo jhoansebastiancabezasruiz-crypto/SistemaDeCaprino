@@ -55,4 +55,9 @@ const Production = db.define('Production', {
         type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: false,
+    tableName: 'production'
 });
+
+module.exports = Production;

@@ -6,6 +6,7 @@ const mountCreate = async (data) => {
         return newMount;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
@@ -15,40 +16,44 @@ const getAllMounts = async () => {
         return Mounts;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
-const getIdMount = async (id) => {
+const  mountGetById = async (id) => {
     try {
         const Mountid = await Mounts.findOne({where: {id}});
         return Mountid;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
-const deleteIdMount = async (id) => {
+const mountDelete = async (id) => {
     try {
         const deleteMount = await Mounts.destroy({where: {id}});
         return deleteMount;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
-const updateMount = async (id, data) => {
+const mountUpdate = async (id, data) => {
     try {
         const updateMount = await Mounts.update(data, {where: {id}}); 
         return updateMount;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
 module.exports = {
     mountCreate,
     getAllMounts,
-    getIdMount,
-    deleteIdMount,
-    updateMount
+     mountGetById,
+    mountDelete,
+    mountUpdate
 };

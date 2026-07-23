@@ -1,5 +1,5 @@
 const db = require('../config/conectionDB');
-const {DataTypes} = require('sequelize');
+const { DataTypes } = require('sequelize');
 
 const livestock = db.define('livestock', {
     id: {
@@ -8,8 +8,8 @@ const livestock = db.define('livestock', {
         autoIncrement: true
     },
     chapeta: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+    type: DataTypes.STRING,
+    allowNull: false
     },
     raza: {
         type: DataTypes.STRING,
@@ -17,8 +17,10 @@ const livestock = db.define('livestock', {
     },
     nombre: {
         type: DataTypes.STRING,
-        max: 30,
-        min: 3,
+        allowNull: false
+    },
+    fechaNacimiento: {
+        type: DataTypes.DATE,
         allowNull: false
     },
     sexo: {
@@ -33,4 +35,8 @@ const livestock = db.define('livestock', {
         type: DataTypes.STRING,
         allowNull: true
     }
+}, {
+    timestamps: false
 });
+
+module.exports = livestock;

@@ -3,9 +3,6 @@ require("dotenv").config();
 const helmet = require("helmet");
 const morgan = require("morgan");
 
-
-
-
 //importar conexion a DB
 const { swaggerUi, swaggerSpec } = require("./docs/swagger");
 const db = require("./config/conectionDB");
@@ -17,7 +14,6 @@ app.use(morgan("dev"));
 // app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //importar rutas
-
 const authRoute = require("./routes/authRoute");
 const userRoute = require("./routes/userRouter");
 const livestockRouter = require("./routes/livestockRouter");

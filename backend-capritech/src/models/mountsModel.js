@@ -11,7 +11,15 @@ const Mating = db.define('Mating', {
         type: DataTypes.DATE,
         allowNull: false
     },
+    numeroMonta: {
+        type: DataTypes.INTEGER,
+        allowNull: false
+    },
     nombreMacho: {
+        type: DataTypes.STRING,
+        allowNull: false
+    },
+    razaMacho: {
         type: DataTypes.STRING,
         allowNull: false
     },
@@ -23,11 +31,11 @@ const Mating = db.define('Mating', {
         type: DataTypes.STRING,
         allowNull: false
     },
-    chapetaHembra: {
-        type: DataTypes.INTEGER,
+    razaHembra: {
+        type: DataTypes.STRING,
         allowNull: false
     },
-    numeroMonta: {
+    chapetaHembra: {
         type: DataTypes.INTEGER,
         allowNull: false
     },
@@ -35,4 +43,9 @@ const Mating = db.define('Mating', {
         type: DataTypes.DATE,
         allowNull: false
     }
+}, {
+    timestamps: false,
+    tableName: 'mounts'
 });
+
+module.exports = Mating;

@@ -26,6 +26,7 @@ const createResponsible = async(req, res) => {
 
     var errores = [];
 
+    
     if(
         !nombre ||
         !documento ||

@@ -53,7 +53,6 @@ const updateFamacha = (req, res) => {
         const response = new Response("Error al actualizar la evaluación Famacha", null, "El ID es obligatorio para actualizar una evaluación Famacha");
         return res.status(400).json(response.json);
     }
-
     const response = new Response(`Actualizando la evaluación Famacha con ID: ${id}`, { chapeta, resultado, observaciones }, false);
     return res.json(response.json);
 };

@@ -18,7 +18,7 @@ const getAllUsers = async () => {
     }
 };
 
-const getIdUsers = async (id) => {
+const userGetById = async (id) => {
     try {
         const userid = await User.findOne({where: {id}});
         return userid;
@@ -27,7 +27,7 @@ const getIdUsers = async (id) => {
     }
 };
 
-const deleteIdUsers = async (id) => {
+const usuarioDelete = async (id) => {
     try {
         const deleteUser = await User.destroy({where: {id}});
         return deleteUser;
@@ -36,7 +36,7 @@ const deleteIdUsers = async (id) => {
     }
 };
 
-const updateUsers = async (id, data) => {
+const userUpdate = async (id, data) => {
     try {
         const updateUser = await User.update(data, {where: {id}}); 
         return updateUser;
@@ -48,7 +48,7 @@ const updateUsers = async (id, data) => {
 module.exports = {
     userCreate,
     getAllUsers,
-    getIdUsers,
-    deleteIdUsers,
-    updateUsers
+    userGetById,
+    usuarioDelete,
+    userUpdate
 };
