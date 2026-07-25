@@ -3,7 +3,7 @@ const {Sequelize} = require('sequelize');
 const db = new Sequelize(
     database = "capritech",
     username = "root",
-    password = "kelly12345",
+    password = "sebastian-12*",
     {
     dialect: 'mysql',
     host: 'localhost',
