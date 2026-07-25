@@ -67,3 +67,56 @@ const init = async () => {
     }
 };
 init();
+
+
+
+
+
+require('dotenv').config();
+const { sendEmail } = require('./services/emailService');
+const {
+  welcomeEmail,
+  passwordResetEmail,
+  registrationSuccessEmail,
+} = require('./functions/emailTemplates');
+
+
+const DESTINATARIO = 'jhoansebastiancabezasruiz@gmail.com';
+const NOMBRE_DESTINATARIO = 'Juan Pérez';
+
+const ejecutarPruebas = async () => {
+  try {
+    
+    await sendEmail(
+      DESTINATARIO,
+      'Bienvenido a la plataforma',
+      'Hola, bienvenido a nuestra plataforma.',
+      welcomeEmail(NOMBRE_DESTINATARIO)
+    );
+    console.log('✔ Prueba 1 (bienvenida) enviada.');
+
+    
+    await sendEmail(
+      DESTINATARIO,
+      'Recuperación de contraseña',
+      'Solicitaste restablecer tu contraseña.',
+      passwordResetEmail(NOMBRE_DESTINATARIO, 'https://miapp.com/reset/123')
+    );
+    console.log('✔ Prueba 2 (recuperación de contraseña) enviada.');
+
+    
+    await sendEmail(
+      DESTINATARIO,
+      'Registro exitoso',
+      'Tu registro se completó con éxito.',
+      registrationSuccessEmail(NOMBRE_DESTINATARIO)
+    );
+    console.log('✔ Prueba 3 (registro exitoso) enviada.');
+
+    console.log('\nTodas las pruebas se ejecutaron correctamente.');
+  } catch (error) {
+    console.error('Ocurrió un error durante las pruebas de envío:', error.message);
+  }
+};
+
+ejecutarPruebas();

@@ -1,0 +1,11 @@
+[2026-07-25T19:17:39.622Z] ERROR: connect ECONNREFUSED ::1:587
+[2026-07-25T19:21:38.467Z] ERROR: connect ECONNREFUSED ::1:587
+[2026-07-25T19:23:10.571Z] ERROR: connect ECONNREFUSED ::1:587
+[2026-07-25T19:25:25.913Z] ERROR: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials 71dfb90a1353d-5c305420809sm2135676e0c.1 - gsmtp
+[2026-07-25T19:28:21.285Z] ERROR: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials ada2fe7eead31-75030fd4830sm2006523137.0 - gsmtp
+[2026-07-25T19:29:27.895Z] ERROR: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-97774e119b8sm2256510241.9 - gsmtp
+[2026-07-25T19:34:08.706Z] ERROR: Invalid login: 535-5.7.8 Username and Password not accepted. For more information, go to
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a1e0cc1a2514c-97774ce146csm2186553241.7 - gsmtp
