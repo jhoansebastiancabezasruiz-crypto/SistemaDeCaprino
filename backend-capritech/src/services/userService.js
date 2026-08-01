@@ -6,6 +6,7 @@ const userCreate = async (data) => {
         return newUser;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
@@ -15,33 +16,37 @@ const getAllUsers = async () => {
         return users;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
 const userGetById = async (id) => {
     try {
-        const userid = await User.findOne({where: {id}});
+        const userid = await User.findOne({ where: { id } });
         return userid;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
 const usuarioDelete = async (id) => {
     try {
-        const deleteUser = await User.destroy({where: {id}});
+        const deleteUser = await User.destroy({ where: { id } });
         return deleteUser;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 
 const userUpdate = async (id, data) => {
     try {
-        const updateUser = await User.update(data, {where: {id}}); 
+        const updateUser = await User.update(data, { where: { id } });
         return updateUser;
     } catch (error) {
         console.log(error);
+        throw error;
     }
 };
 

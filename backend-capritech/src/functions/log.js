@@ -1,31 +1,16 @@
 const fs = require('fs');
-const path = require('path');
 
-const LOG_DIR = path.join(__dirname, '..', 'logs');
-const LOG_FILE = path.join(LOG_DIR, 'errors.log');
+function createLog(error) {
+  const fecha = new Date().toLocaleString();
+  const texto = fecha + " - Error: " + error.message + "\n";
 
+  console.log(texto);
 
-if (!fs.existsSync(LOG_DIR)) {
-  fs.mkdirSync(LOG_DIR, { recursive: true });
+  fs.appendFile('logs.txt', texto, function (err) {
+    if (err) {
+      console.log("no se pudo guardar el log");
+    }
+  });
 }
 
-
- */
-const createLog = async (error) => {
-  const timestamp = new Date().toISOString();
-  const message = `[${timestamp}] ERROR: ${error.message}\n`;
-
-  
-  console.error(message);
-
-  
-  try {
-    fs.appendFileSync(LOG_FILE, message);
-  } catch (fileError) {
-    console.error('No se pudo escribir en el archivo de logs:', fileError.message);
-  }
-};
-
-module.exports = {
-  createLog,
-};
+module.exports = { createLog };

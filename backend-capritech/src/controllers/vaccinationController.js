@@ -1,124 +1,163 @@
-const { vaccinationCreate } = require("../services/vaccinationService");
+const {
+    vaccinationCreate,
+    getAllVaccination,
+    getVaccinationById,
+    vaccinationUpdate,
+    vaccinationDelete
+} = require("../services/vaccinationService");
+
 const Response = require("../functions/response");
 
-const getAllVaccination = (req, res) => {
-    const body = req.body;
-    console.log("body recibido: ", body);
+const getAllVaccinations = async (req, res) => {
 
-    res.status(200);
-    res.json({ mensaje: "Obteniendo todas las vacunaciones" });
+    try {
+
+        const vaccinations = await getAllVaccination();
+
+        const response = new Response(
+            "Lista de vacunaciones",
+            vaccinations,
+            null
+        );
+
+        return res.status(200).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            "Error al obtener las vacunaciones",
+            {},
+            [error.message]
+        );
+
+        return res.status(500).json(response.json);
+    }
 };
 
-const getVaccinationById = (req, res) => {
-    const { id } = req.params;
+const getVaccinationByIdController = async (req, res) => {
 
-    res.json({
-        mensaje: `Obteniendo la vacunación con ID: ${id}`
-    });
+    try {
+
+        const { id } = req.params;
+
+        const vaccination = await getVaccinationById(id);
+
+        if (!vaccination) {
+
+            const response = new Response(
+                "Vacunación no encontrada",
+                {},
+                []
+            );
+
+            return res.status(404).json(response.json);
+        }
+
+        const response = new Response(
+            "Vacunación encontrada",
+            vaccination,
+            null
+        );
+
+        return res.status(200).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            "Error al consultar la vacunación",
+            {},
+            [error.message]
+        );
+
+        return res.status(500).json(response.json);
+    }
 };
 
 const createVaccination = async (req, res) => {
 
-    const {
-        chapeta,
-        nombre,
-        fechaVacunacion,
-        horaVacunacion,
-        nombreVacuna,
-        responsable
-    } = req.body;
+    try {
 
-    let errores = [];
+        const vaccination = await vaccinationCreate(req.body);
 
-    if (
-        !chapeta ||
-        !nombre ||
-        !fechaVacunacion ||
-        !horaVacunacion ||
-        !nombreVacuna ||
-        !responsable
-    ) {
-        errores.push({
-            mensaje: "Todos los campos son obligatorios"
-        });
-    }
-
-    if (chapeta == "") {
-        errores.push({ mensaje: "El campo chapeta no puede estar vacío" });
-    }
-
-    if (nombre == "") {
-        errores.push({ mensaje: "El campo nombre no puede estar vacío" });
-    }
-
-    if (fechaVacunacion == "") {
-        errores.push({ mensaje: "El campo fechaVacunacion no puede estar vacío" });
-    }
-
-    if (horaVacunacion == "") {
-        errores.push({ mensaje: "El campo horaVacunacion no puede estar vacío" });
-    }
-
-    if (nombreVacuna == "") {
-        errores.push({ mensaje: "El campo nombreVacuna no puede estar vacío" });
-    }
-
-    if (responsable == "") {
-        errores.push({ mensaje: "El campo responsable no puede estar vacío" });
-    }
-
-    if (errores.length > 0) {
         const response = new Response(
-            "Error en la creación de la vacunación",
-            null,
-            errores
+            "Vacunación creada exitosamente",
+            vaccination,
+            null
         );
 
-        res.status(400);
-        res.json(response.json);
-        return;
+        return res.status(201).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            "Error al crear la vacunación",
+            {},
+            [error.message]
+        );
+
+        return res.status(500).json(response.json);
     }
-
-    const data = {
-        chapeta,
-        nombre,
-        fechaVacunacion,
-        horaVacunacion,
-        nombreVacuna,
-        responsable
-    };
-
-    const vaccination = await vaccinationCreate(data);
-
-    const response = new Response(
-        true,
-        "Vacunación creada exitosamente",
-        vaccination
-    );
-
-    res.status(201);
-    res.json(response.json);
 };
 
-const updateVaccination = (req, res) => {
-    const { id } = req.params;
+const updateVaccination = async (req, res) => {
 
-    res.json({
-        mensaje: `Actualizando la vacunación con ID: ${id}`
-    });
+    try {
+
+        const { id } = req.params;
+
+        const vaccination = await vaccinationUpdate(id, req.body);
+
+        const response = new Response(
+            "Vacunación actualizada correctamente",
+            vaccination,
+            null
+        );
+
+        return res.status(200).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            "Error al actualizar la vacunación",
+            {},
+            [error.message]
+        );
+
+        return res.status(500).json(response.json);
+    }
 };
 
-const deleteVaccination = (req, res) => {
-    const { id } = req.params;
+const deleteVaccination = async (req, res) => {
 
-    res.json({
-        mensaje: `Eliminando la vacunación con ID: ${id}`
-    });
+    try {
+
+        const { id } = req.params;
+
+        await vaccinationDelete(id);
+
+        const response = new Response(
+            "Vacunación eliminada correctamente",
+            {},
+            null
+        );
+
+        return res.status(200).json(response.json);
+
+    } catch (error) {
+
+        const response = new Response(
+            "Error al eliminar la vacunación",
+            {},
+            [error.message]
+        );
+
+        return res.status(500).json(response.json);
+    }
 };
 
 module.exports = {
-    getAllVaccination,
-    getVaccinationById,
+    getAllVaccination: getAllVaccinations,
+    getVaccinationById: getVaccinationByIdController,
     createVaccination,
     updateVaccination,
     deleteVaccination

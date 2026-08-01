@@ -1,54 +1,60 @@
-const births = require('../models/birthsModel');
+const Birth = require("../models/birthsModel");
 
-const birthsCreate = async (data) => {
+const createBirth = async (data) => {
     try {
-        const newBirth = await births.create(data);
-        return newBirth;
+        const birth = await Birth.create(data);
+        return birth;
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const getAllbirths = async () => {
+const getAllBirths = async () => {
     try {
-        const births = await births.findAll();
-        return births;
+        return await Birth.findAll();
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const getIdbirths = async (id) => {
+const getBirthById = async (id) => {
     try {
-        const birthid = await births.findOne({where: {id}});
-        return birthid;
+        return await Birth.findOne({
+            where: { id }
+        });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const deleteIdbirths = async (id) => {
+const updateBirth = async (id, data) => {
     try {
-        const deleteBirth = await births.destroy({where: {id}});
-        return deleteBirth;
+        await Birth.update(data, {
+            where: { id }
+        });
+
+        return await Birth.findOne({
+            where: { id }
+        });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const updatebirths = async (id, data) => {
+const deleteBirth = async (id) => {
     try {
-        const updateBirth = await births.update(data, {where: {id}}); 
-        return updateBirth;
+        return await Birth.destroy({
+            where: { id }
+        });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
 module.exports = {
-    birthsCreate,
-    getAllbirths,
-    getIdbirths,
-    deleteIdbirths,
-    updatebirths
+    createBirth,
+    getAllBirths,
+    getBirthById,
+    updateBirth,
+    deleteBirth
 };

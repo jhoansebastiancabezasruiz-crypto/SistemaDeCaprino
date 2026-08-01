@@ -1,24 +1,17 @@
 {
   "name": "backend-capritech",
   "version": "1.0.0",
-  "description": "Servicio de envío de correos electrónicos con Nodemailer - Actividad SENA (Ficha 3285039)",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js ./src/server.js",
-    "dev": "nodemon server.js"
+    "start": "node --watch ./src/server.js"
   },
-  "keywords": [
-    "nodemailer",
-    "express",
-    "api",
-    "email",
-    "backend"
-  ],
-  
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.1",

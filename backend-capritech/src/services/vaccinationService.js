@@ -1,54 +1,61 @@
-const vaccination = require('../models/vaccinationModel');
+const Vaccination = require("../models/vaccinationModel");
 
-const createvaccination = async (data) => {
+const vaccinationCreate = async (data) => {
     try {
-        const newVaccination = await vaccination.create(data);
-        return newVaccination;
+        return await Vaccination.create(data);
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const getAllvaccinations = async () => {
+const getAllVaccination = async () => {
     try {
-        const vaccinations = await vaccination.findAll();
-        return vaccinations;
+        return await Vaccination.findAll();
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const getIdvaccinations = async (id) => {
+const getVaccinationById = async (id) => {
     try {
-        const vaccinationid = await vaccination.findOne({where: {id}});
-        return vaccinationid;
+        return await Vaccination.findOne({
+            where: { id }
+        });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const deleteIdvaccinations = async (id) => {
+const vaccinationUpdate = async (id, data) => {
     try {
-        const deleteVaccination = await vaccination.destroy({where: {id}});
-        return deleteVaccination;
+
+        await Vaccination.update(data, {
+            where: { id }
+        });
+
+        return await Vaccination.findOne({
+            where: { id }
+        });
+
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
-const updatevaccinations = async (id, data) => {
+const vaccinationDelete = async (id) => {
     try {
-        const updateVaccination = await vaccination.update(data, {where: {id}}); 
-        return updateVaccination;
+        return await Vaccination.destroy({
+            where: { id }
+        });
     } catch (error) {
-        console.log(error);
+        throw error;
     }
 };
 
 module.exports = {
-    createvaccination,
-    getAllvaccinations,
-    getIdvaccinations,
-    deleteIdvaccinations,
-    updatevaccinations
+    vaccinationCreate,
+    getAllVaccination,
+    getVaccinationById,
+    vaccinationUpdate,
+    vaccinationDelete
 };

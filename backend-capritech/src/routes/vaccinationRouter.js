@@ -1,11 +1,14 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const{getAllVaccination, 
+
+const {
+    getAllVaccination,
     getVaccinationById,
     createVaccination,
     updateVaccination,
-    deleteVaccination} = require("../controllers/vaccinationController.js");   
-        
+    deleteVaccination
+} = require("../controllers/vaccinationController");
+
 /**
  * @swagger
  * tags:
@@ -17,93 +20,89 @@ const{getAllVaccination,
  * @swagger
  * /api/vaccination/vaccinationAll:
  *   get:
- *     summary: Obtener todos los registros de vacunación
- *     description: Devuelve una lista de todos los registros de vacunación registrados en el sistema
+ *     summary: Obtener todas las vacunaciones
+ *     description: Devuelve una lista de todas las vacunaciones registradas
  *     tags:
  *       - Vacunación
  *     responses:
  *       200:
- *         description: Lista de registros de vacunación obtenida correctamente
+ *         description: Lista de vacunaciones obtenida correctamente
  */
-router.get("/vaccinationAll", getAllVaccination)
+router.get("/vaccinationAll", getAllVaccination);
 
 /**
  * @swagger
  * /api/vaccination/vaccination/{id}:
  *   get:
- *     summary: Obtener un registro de vacunación por ID
+ *     summary: Obtener una vacunación por ID
  *     tags:
  *       - Vacunación
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID del registro de vacunación
+ *         description: ID de la vacunación
  *         schema:
- *           type: string
+ *           type: integer
  *     responses:
  *       200:
- *         description: Registro de vacunación obtenido correctamente
+ *         description: Vacunación obtenida correctamente
  *       404:
- *         description: Registro de vacunación no encontrado
+ *         description: Vacunación no encontrada
  */
-router.get("/vaccination/:id", getVaccinationById)
+router.get("/vaccination/:id", getVaccinationById);
 
 /**
  * @swagger
  * /api/vaccination/vaccination:
  *   post:
- *     summary: Crear registro de vacunación
+ *     summary: Crear una vacunación
  *     tags:
  *       - Vacunación
  *     responses:
  *       201:
- *         description: Registro de vacunación creado correctamente
+ *         description: Vacunación creada correctamente
  */
-router.post("/vaccination", createVaccination)
+router.post("/vaccination", createVaccination);
 
 /**
  * @swagger
  * /api/vaccination/vaccination/{id}:
  *   put:
- *     summary: Actualizar registro de vacunación
+ *     summary: Actualizar una vacunación
  *     tags:
  *       - Vacunación
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
- *         description: ID del registro de vacunación
+ *         description: ID de la vacunación
  *         schema:
- *           type: string
+ *           type: integer
  *     responses:
  *       200:
-*         description: Registro de vacunación actualizado correctamente
-*       404:
-*         description: Registro de vacunación no encontrado
+ *         description: Vacunación actualizada correctamente
  */
-router.put("/vaccination/:id", updateVaccination)
+router.put("/vaccination/:id", updateVaccination);
 
 /**
-* @swagger
-* /api/vaccination/vaccination/{id}:
-*   delete:
-*     summary: Eliminar registro de vacunación
-*     tags:
-*       - Vacunación
-*     parameters:
-*       - in: path
-*         name: id
-*         required: true
-*         description: ID del registro de vacunación
-*         schema:
-*           type: string
-*     responses:
-*       200:
-*         description: Registro de vacunación eliminado correctamente
-*       404:
-*         description: Registro de vacunación no encontrado
+ * @swagger
+ * /api/vaccination/vaccination/{id}:
+ *   delete:
+ *     summary: Eliminar una vacunación
+ *     tags:
+ *       - Vacunación
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: ID de la vacunación
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Vacunación eliminada correctamente
  */
-router.delete("/vaccination/:id", deleteVaccination)
+router.delete("/vaccination/:id", deleteVaccination);
 
 module.exports = router;
